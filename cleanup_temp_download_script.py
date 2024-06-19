@@ -2,6 +2,7 @@
 import os
 import shutil
 import stat
+import tempfile
 
 def remove_readonly(func, path, exc_info):
     os.chmod(path, stat.S_IWRITE)
@@ -24,8 +25,7 @@ def clean_folder(folder_path, exceptions):
 
 def main():
     downloads_path = 'D:/Downloads/'  # Adjust the path as necessary
-    temp_path = os.getenv('TEMP')  # Path to the temp folder
-    print(temp_path)
+    temp_path = tempfile.gettempdir()  # Path to the temp folder
     exceptions = ['important.txt', 'do_not_delete']  # List filenames or directories to exclude from deletion
     clean_folder(downloads_path, exceptions)
     clean_folder(temp_path, [])
